@@ -99,6 +99,13 @@ def info_misto(misto_id):
         .order_by(OckovaniRezervace.datum) \
         .all()
 
+    misto_stats = db.session.query("druha_davka" ).from_statement(text(
+        """
+        select sum(maximalni_kapacita-volna_kapacita) druha_davka from ockovani_rezervace where kalendar_ockovani='V2' and datum>now()-'1 day'::interval
+        and ockovaci_misto_id=:misto_id and import_id=:import_id
+        """
+    )).params(misto_id=misto_id).params(import_id=_last_import_id()).all()
+
     registrace_info = db.session.query(OckovaniRegistrace.vekova_skupina, OckovaniRegistrace.povolani,
                                        func.sum(OckovaniRegistrace.pocet).label("pocet_mist")).filter(
         OckovaniRegistrace.ockovaci_misto_id == misto.id).filter(
@@ -140,7 +147,7 @@ def info_misto(misto_id):
 
     total = _compute_vaccination_stats(ampule_info)
 
-    return render_template('misto.html', data=nactene_informace, misto=misto, total=total,
+    return render_template('misto.html', data=nactene_informace, misto=misto, misto_stats=misto_stats, total=total,
                            registrace_info=registrace_info, metriky_info=metriky_info,
                            last_update=_last_import_modified(), now=_now())
 

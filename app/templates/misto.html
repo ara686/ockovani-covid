@@ -51,11 +51,14 @@
                                     <dd>{{misto.adresa}}</dd>
                                     <dt>Bezbariérový přístup</dt>
                                     <dd>{{ 'Ano' if misto.bezbarierovy_pristup else 'Ne' }}</dd>
+                                    <dt>Odhad počtu vakcín pro 2. dávky</dt>
+                                    <dd>{{ misto_stats[0].druha_davka }}</dd>
                                 </dl>
                                 <a href="https://cfa.uzis.cz/vaccination-centers/{{misto.id}}" class="btn btn-primary"
                                    target="_blank">
                                     Oficiální stránka místa
                                 </a>
+
                             </div>
                         </div>
                     </div>
@@ -108,7 +111,8 @@
                     </table>
                 </div>
                 {% endif %}
-                <i>Jde o orientační výpočet z distribuce a spotřeby vakcín. Dataset spotřeba vakcín vykazuje <b>velké zpoždění a nepřesnosti!!!</b></i>
+                <i>Jde o orientační výpočet z distribuce a spotřeby vakcín. Dataset spotřeba vakcín vykazuje <b>velké
+                    zpoždění a nepřesnosti!!!</b></i>
             </div>
             <div class="tab-pane" id="registration">
                 <div class="row">
@@ -116,7 +120,8 @@
                         <div class="card h-100">
                             <div class="card-body">
                                 <h5 class="card-title" data-toggle="tooltip" data-placement="bottom"
-                                    title="Dataset registrace - čekající na PIN2">Čekající na přidělení PIN2 (výběr termínu)</h5>
+                                    title="Dataset registrace - čekající na PIN2">Čekající na přidělení PIN2 (výběr
+                                    termínu)</h5>
                                 {% if registrace_info %}
                                 <table class="table table-bordered table-striped table-sm">
                                     <thead class="thead-dark">
@@ -130,7 +135,8 @@
                                     {% for item in registrace_info %}
                                     <tr>
                                         <td class="td-ellipsis">{{ item.vekova_skupina }}</td>
-                                        <td class="td-ellipsis" data-toggle="tooltip" data-placement="bottom" title="{{ item.povolani }}">
+                                        <td class="td-ellipsis" data-toggle="tooltip" data-placement="bottom"
+                                            title="{{ item.povolani }}">
                                             {{ item.povolani }}
                                         </td>
                                         <td class="td-ellipsis text-right">
@@ -167,7 +173,8 @@
                                     {% for item in metriky_info %}
                                     <tr>
                                         <td class="td-ellipsis">{{ item.vekova_skupina }}</td>
-                                        <td class="td-ellipsis" data-toggle="tooltip" data-placement="bottom" title="{{ item.povolani }}">
+                                        <td class="td-ellipsis" data-toggle="tooltip" data-placement="bottom"
+                                            title="{{ item.povolani }}">
                                             {{ item.povolani }}
                                         </td>
                                         <td class="td-ellipsis text-right" data-toggle="tooltip" data-placement="bottom"
@@ -189,7 +196,8 @@
                                     Pro toto místo zatím nemáme žádná data o rezervacích.
                                 </div>
                                 {% endif %}
-                                <p>Za posledních 7 dní jde o poměr lidí s konkrétním očkovacím termínem a všech registrovaných (opět za 7 dnů).</p>
+                                <p>Za posledních 7 dní jde o poměr lidí s konkrétním očkovacím termínem a všech
+                                    registrovaných (opět za 7 dnů).</p>
                             </div>
                         </div>
                     </div>
@@ -250,6 +258,9 @@
     var options = {};
     var marker = new SMap.Marker(center, "marker", options);
     layer.addMarker(marker);
+
+
+
 
 
 
